@@ -8,6 +8,9 @@
         kodePos.getKodePos();
         Console.WriteLine();
 
+        Console.WriteLine("Implementasi Soal State Based Construction");
+        DoorMachine doorMachine = new DoorMachine();
+        doorMachine.DoorMachineStart();
 
     }
 
@@ -44,5 +47,45 @@ class KodePos
             Console.WriteLine(tabelKodePos[i].kelurahan + ": " + tabelKodePos[i].kodePos);
         }
     }
+}
+
+class DoorMachine
+{
+    enum State {Terkunci, Terbuka };
+    public void DoorMachineStart()
+    {
+        State state = State.Terkunci;
+        string command;
+        string[] screenName = { "Terkunci", "Terbuka" };
+        Console.WriteLine("Pintu " + screenName[(int)state]);
+        Console.Write("Masukan Command: ");
+        command = Console.ReadLine();
+        while (command != "exit")
+        {
+            switch (state)
+            {
+                case State.Terbuka:
+                    if (command == "KunciPintu")
+                        state = State.Terkunci;
+                    else if (command == "BukaPintu")
+                        state = State.Terbuka;
+                    else
+                        state = State.Terbuka;
+                break;
+                case State.Terkunci:
+                    if (command == "KunciPintu")
+                        state = State.Terkunci;
+                    else if (command == "BukaPintu")
+                        state = State.Terbuka;
+                    else
+                        state = State.Terkunci;
+                break;
+            }
+            Console.WriteLine("Pintu " + screenName[(int)state]);
+            Console.Write("Masukan Command: ");
+            command = Console.ReadLine();
+        }
+        Console.WriteLine("Keluar Pintu");
+    } 
 }
 
